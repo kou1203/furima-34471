@@ -58,10 +58,10 @@
 
 ## PRODUCT_HISTORYテーブル
 
-| Column           | Type       | Option                |
-| ---------------- | ---------- | --------------------- |
-| user             | references | foreign_key: true     |
-| product          | references | foreign_key: true     |
+| Column              | Type       | Option                |
+| ------------------- | ---------- | --------------------- |
+| user_id             | references | foreign_key: true     |
+| product_id          | references | foreign_key: true     |
 
 ### Association
 belongs_to :user

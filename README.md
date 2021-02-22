@@ -50,7 +50,6 @@
 | shipping_area   | string              | NOT NULL |
 | days_to_ship    | string              | NOT NULL |
 | price           | integer             | NOT NULL |
-| user            | references          | NONE     |
 
 ### Association
 - has_one :purchase
@@ -59,10 +58,10 @@
 
 ## PRODUCT_HISTORYテーブル
 
-| Column           | Type       | Option       |
-| ---------------- | ---------- | ------------ |
-| user             | references | NOT NULL     |
-| product          | references | NOT NULL     |
+| Column           | Type       | Option                |
+| ---------------- | ---------- | --------------------- |
+| user             | references | foreign_key: true     |
+| product          | references | foreign_key: true     |
 
 ### Association
 belongs_to :user

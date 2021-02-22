@@ -2,33 +2,33 @@
 
 ## USERテーブル
   
-| Column                | Type    | Options  |
-|---------------------- | ------- | -------- |
-| nickname              | string  | NOT NULL |
-| mail                  | string  | NOT NULL |
-| password              | string  | NOT NULL |
-| password_confirmation | string  | NOT NULL |
-| last_name             | string  | NOT NULL |
-| first_name            | string  | NOT NULL |
-| birthday              | integer | NOT NULL |
+| Column                | Type           | Options      |
+|---------------------- | -------------- | ------------ |
+| nickname              | string         | NOT NULL     |
+| mail                  | deviseにて実装 | unique: true |
+| password              | deviseにて実装 | NOT NULL     |
+| password_confirmation | deviseにて実装 | NOT NULL     |
+| last_name             | string         | NOT NULL     |
+| first_name            | string         | NOT NULL     |
+| last_name_kana        | string         | NOT NULL     |
+| first_name_kana       | string         | NOT NULL     |
+| birthday              | date           | NOT NULL     |
 
 ### Association
-- has_many :purchase
-- has_many :product
+- has_many :purchases
+- has_many :product_histories
+- has_many :product, through: :product_histories
 
 ## PURCHASEテーブル
 
 | Column           | Typ        | Option   |
 | ---------------- | ---------- | -------- |
-| credit           | integer    | NOT NULL |
-| expiration_date  | integer    | NOT NULL |
-| security_code    | integer    | NOT NULL |
-| postal_code      | integer    | NOT NULL |
-| prefectures      | string     | NOT NULL |
+| postal_code      | string     | NOT NULL |
+| prefectures_id   | integer    | NOT NULL |
 | municipalities   | string     | NOT NULL |
 | address          | integer    | NOT NULL |
 | building_name    | integer    | NONE     |
-| telephone_number | integer    | NOT NULL |
+| telephone_number | string     | NOT NULL |
 | user             | references | NONE     |
 | product          | references | NONE     |
 
@@ -52,6 +52,18 @@
 | price           | integer             | NOT NULL |
 | user            | references          | NONE     |
 
-## Association
-- belongs_to :user
+### Association
 - has_one :purchase
+- has_many :product_histories
+- has_many :users, through: :product_histories
+
+## PRODUCT_HISTORYテーブル
+
+| Column           | Type       | Option       |
+| ---------------- | ---------- | ------------ |
+| user             | references | NOT NULL     |
+| product          | references | NOT NULL     |
+
+### Association
+belongs_to :user
+belongs_to :product

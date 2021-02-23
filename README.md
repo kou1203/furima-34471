@@ -1,6 +1,6 @@
 # FurimaER図
 
-## USERテーブル
+## USERSテーブル
   
 | Column                | Type           | Options                  |
 |---------------------- | -------------- | ------------------------ |
@@ -17,7 +17,7 @@
 - has_many :product_histories
 - has_many :products
 
-## PURCHASEテーブル
+## PURCHASESテーブル
 
 | Column           | Type       | Option                          |
 | ---------------- | ---------- | ------------------------------- |
@@ -33,7 +33,7 @@
 - belongs_to :product_history
 
 
-## PRODUCTテーブル
+## PRODUCTSテーブル
 
 | Column             | Type                | Option            |
 | ------------------ | ------------------- | ----------------- |
@@ -51,7 +51,7 @@
 - belongs_to :user
 - has_one :product_history
 
-## PRODUCT_HISTORYテーブル
+## PRODUCT_HISTORIESテーブル
 
 | Column              | Type       | Option                |
 | ------------------- | ---------- | --------------------- |

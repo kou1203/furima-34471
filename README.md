@@ -30,7 +30,7 @@
 | product_history  | references | foreign_key: true, null: false  |
 
 ### Association
-- belongs_to :purchase_history
+- belongs_to :product_history
 
 
 ## PRODUCTテーブル
@@ -49,7 +49,7 @@
 
 ### Association
 - belongs_to :user
-- has_one :purchase_history
+- has_one :product_history
 
 ## PRODUCT_HISTORYテーブル
 

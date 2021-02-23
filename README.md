@@ -2,16 +2,16 @@
 
 ## USERテーブル
   
-| Column                | Type           | Options      |
-|---------------------- | -------------- | ------------ |
-| nickname              | string         | null: false  |
-| email                 | string         | unique: true |
-| encrypted_password    | string         | null: false  |
-| last_name             | string         | null: false  |
-| first_name            | string         | null: false  |
-| last_name_kana        | string         | null: false  |
-| first_name_kana       | string         | null: false  |
-| birthday              | date           | null: false  |
+| Column                | Type           | Options                  |
+|---------------------- | -------------- | ------------------------ |
+| nickname              | string         | null: false              |
+| email                 | string         | unique: true, null false |
+| encrypted_password    | string         | null: false              |
+| last_name             | string         | null: false              |
+| first_name            | string         | null: false              |
+| last_name_kana        | string         | null: false              |
+| first_name_kana       | string         | null: false              |
+| birthday              | date           | null: false              |
 
 ### Association
 - has_many :product_histories
@@ -19,15 +19,15 @@
 
 ## PURCHASEテーブル
 
-| Column           | Type       | Option       |
-| ---------------- | ---------- | ------------ |
-| postal_code      | string     | null: false  |
-| prefectures_id   | integer    | null: false  |
-| municipalities   | string     | null: false  |
-| address          | string     | null: false  |
-| building_name    | string     | NONE         |
-| telephone_number | string     | null: false  |
-| product_history  | references | null: false  |
+| Column           | Type       | Option                          |
+| ---------------- | ---------- | ------------------------------- |
+| postal_code      | string     | null: false                     |
+| prefectures_id   | integer    | null: false                     |
+| municipalities   | string     | null: false                     |
+| address          | string     | null: false                     |
+| building_name    | string     | NONE                            |
+| telephone_number | string     | null: false                     |
+| product_history  | references | foreign_key: true, null: false  |
 
 ### Association
 - belongs_to :purchase_history
@@ -42,7 +42,7 @@
 | category_id        | integer             | null: false       |
 | status_id          | integer             | null: false       |
 | shipping_burden_id | integer             | null: false       |
-| shipping_area_id   | integer             | null: false       |
+| prefectures_id     | integer             | null: false       |
 | days_to_ship_id    | integer             | null: false       |
 | price              | integer             | null: false       |
 | user               | references          | foreign_key: true |

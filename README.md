@@ -16,52 +16,46 @@
 
 ### Association
 - has_many :purchases
-- has_many :product_histories
-- has_many :product, through: :product_histories
+- has_one :product_history
+- has_many :products
 
 ## PURCHASEテーブル
 
-| Column           | Typ        | Option   |
+| Column           | Type       | Option   |
 | ---------------- | ---------- | -------- |
 | postal_code      | string     | NOT NULL |
 | prefectures_id   | integer    | NOT NULL |
 | municipalities   | string     | NOT NULL |
-| address          | integer    | NOT NULL |
-| building_name    | integer    | NONE     |
+| address          | string     | NOT NULL |
+| building_name    | string     | NONE     |
 | telephone_number | string     | NOT NULL |
 | user             | references | NONE     |
-| product          | references | NONE     |
 
 ### Association
 - belongs_to :user
 - belongs_to :product
+- has_one :purchase_history
 
 
 ## PRODUCTテーブル
 
-| Column          | Type                | Option   |
-| --------------- | ------------------- | -------- |
-| image           | ActiveStorageで実装 | NOT NULL |
-| name            | string              | NOT NULL |
-| description     | text                | NOT NULL |
-| category        | string              | NOT NULL |
-| status          | string              | NOT NULL | 
-| shipping_burden | string              | NOT NULL |
-| shipping_area   | string              | NOT NULL |
-| days_to_ship    | string              | NOT NULL |
-| price           | integer             | NOT NULL |
+| Column          | Type                | Option            |
+| --------------- | ------------------- | ----------------- |
+| name            | string              | NOT NULL          |
+| description     | text                | NOT NULL          |
+| price           | integer             | NOT NULL          |
+| user            | references          | foreign_key: true |
 
 ### Association
 - has_one :purchase
-- has_many :product_histories
-- has_many :users, through: :product_histories
+- belongs_to :user
 
 ## PRODUCT_HISTORYテーブル
 
 | Column              | Type       | Option                |
 | ------------------- | ---------- | --------------------- |
-| user_id             | references | foreign_key: true     |
-| product_id          | references | foreign_key: true     |
+| user                | references | foreign_key: true     |
+| product             | references | foreign_key: true     |
 
 ### Association
 belongs_to :user

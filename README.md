@@ -27,7 +27,7 @@
 | address          | string     | null: false  |
 | building_name    | string     | NONE         |
 | telephone_number | string     | null: false  |
-| product          | references | null: false  |
+| product_history  | references | null: false  |
 
 ### Association
 - belongs_to :purchase_history
@@ -48,7 +48,6 @@
 | user               | references          | foreign_key: true |
 
 ### Association
-- has_one :purchase
 - belongs_to :user
 - has_one :purchase_history
 
@@ -57,7 +56,7 @@
 | Column              | Type       | Option                |
 | ------------------- | ---------- | --------------------- |
 | user                | references | foreign_key: true     |
-| purchase            | references | foreign_key: true     |
+| product             | references | foreign_key: true     |
 
 ### Association
 belongs_to :user

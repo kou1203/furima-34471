@@ -22,7 +22,7 @@
 | Column           | Type       | Option                          |
 | ---------------- | ---------- | ------------------------------- |
 | postal_code      | string     | null: false                     |
-| prefectures_id   | integer    | null: false                     |
+| prefecture_id   | integer    | null: false                     |
 | municipalities   | string     | null: false                     |
 | address          | string     | null: false                     |
 | building_name    | string     | NONE                            |
@@ -42,7 +42,7 @@
 | category_id        | integer             | null: false       |
 | status_id          | integer             | null: false       |
 | shipping_burden_id | integer             | null: false       |
-| prefectures_id     | integer             | null: false       |
+| prefecture_id     | integer             | null: false       |
 | days_to_ship_id    | integer             | null: false       |
 | price              | integer             | null: false       |
 | user               | references          | foreign_key: true |

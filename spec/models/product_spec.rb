@@ -12,7 +12,7 @@ RSpec.describe Product, type: :model do
       end 
 
       it '販売価格が¥300~¥9,999,999の間であれば保存できる' do
-        @product.price ="3000"
+        @product.price = 3000
         expect(@product).to be_valid 
       end
     end 
@@ -78,7 +78,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price is invalid")
       end
 
-      it '販売価格は、¥9,999,999より低くないと出品できない' do 
+      it '販売価格は、¥10,000,000以上では出品できない' do 
         @product.price = 12345678
         @product.valid? 
         expect(@product.errors.full_messages).to include()

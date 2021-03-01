@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index 
-    @products = Product.order("created_at DESC")
   end
 
   def new 

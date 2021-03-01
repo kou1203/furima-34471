@@ -37,33 +37,33 @@ RSpec.describe Product, type: :model do
       end 
 
       it 'カテゴリー情報がないと出品できない' do 
-        @product.category_id = ""
+        @product.category_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category is not a number")
+        expect(@product.errors.full_messages).to include("Category must be other than 1")
       end 
 
       it '商品の状態の情報がないと出品できない' do 
-        @product.status_id = ""
+        @product.status_id = 1
         @product.valid? 
-        expect(@product.errors.full_messages).to include("Status is not a number")
+        expect(@product.errors.full_messages).to include("Status must be other than 1")
       end 
 
       it '配送料負担の情報がないと出品できない' do 
-        @product.shipping_burden_id = ""
+        @product.shipping_burden_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping burden is not a number")
+        expect(@product.errors.full_messages).to include("Shipping burden must be other than 1")
       end
 
       it '発送元の地域についての情報がないと出品できない' do 
-        @product.prefecture_id = ""
+        @product.prefecture_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Prefecture is not a number")
+        expect(@product.errors.full_messages).to include("Prefecture must be other than 1")
       end 
 
       it '発送までの日数についての情報がないと出品できない' do 
-        @product.days_to_ship_id = ""
+        @product.days_to_ship_id = 1
         @product.valid? 
-        expect(@product.errors.full_messages).to include("Days to ship is not a number")
+        expect(@product.errors.full_messages).to include("Days to ship must be other than 1")
       end 
 
       it '販売価格についての情報がないと出品できない' do 
@@ -73,23 +73,34 @@ RSpec.describe Product, type: :model do
       end
 
       it '販売価格は、¥300より低いと出品できない' do 
-        @product.price ="200"
+        @product.price = 200
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is invalid")
       end
 
       it '販売価格は、¥9,999,999より低くないと出品できない' do 
-        @product.price ="12345678"
+        @product.price = 12345678
         @product.valid? 
         expect(@product.errors.full_messages).to include()
       end 
 
       it '販売価格は半角数字出ないと保存できない' do 
-        @product.price ="２００００"
+        @product.price = "２００００"
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is invalid")
       end 
 
+      it '販売価格は半角英数混合では出品できない' do 
+        @product.price = "2000yen"
+        @product.valid? 
+        expect(@product.errors.full_messages).to include()
+      end 
+
+      it '販売価格は半角英語だけでは出品できない' do 
+        @product.price = "aaaayen"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is invalid")
+      end
     end 
 
   end

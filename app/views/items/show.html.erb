@@ -8,11 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @product.image, class:"item-box-img" %>
-      <%# <% unless @product_histories.nil? %>
-        <%# <div class="sold-out"> %>
-          <%# <span>Sold Out!!</span> %>
-        <%# </div> %>
-      <%# <% end %>
+      <% if @product.product_history != nil %>
+         <div class="sold-out">
+          <span>Sold Out!!</span>
+        </div>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -23,17 +23,16 @@
       </span>
     </div>
 
-   
+  <% if @product.product_history == nil %>
   <% if user_signed_in? %>
     <% if current_user.id == @product.user_id %>
       <%= link_to "商品の編集", edit_item_path(@product.id), method: :get, class: "item-red-btn" %>
       <p class="or-text">or</p>
       <%= link_to "削除", item_path(@product.id), method: :delete, class:"item-destroy" %>
     <% else %>
-      <%# <% unless @product_histories.nil? %>
-        <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
-      <%# <% end %>
+          <%= link_to "購入画面に進む",  item_orders_path(@product.id),class:"item-red-btn"%>
     <% end %>
+  <% end %>
   <% end %>
 
     <div class="item-explain-box">

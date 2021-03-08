@@ -5,6 +5,9 @@ class User < ApplicationRecord
   VARID_NAME_REGEX = /[ぁ-んァ-ヶ一-龥々]/
   VARID_NAME_KANA_REGEX = /[ァ-ヶ]/
 
+  has_many :products 
+  has_many :product_histories
+
   with_options presence: true do 
   validates :password, format:{ with: VARID_PASSWORD_REGEX }
   validates :nickname 

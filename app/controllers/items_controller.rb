@@ -46,8 +46,10 @@ class ItemsController < ApplicationController
     :status_id, :shipping_burden_id, :prefecture_id, :days_to_ship_id, :price ).merge(user_id: current_user.id )
   end 
 
+  
+
   def in_to_index
-    unless current_user.id == @product.user_id
+    if current_user.id != @product.user_id || @product.product_history != nil
       redirect_to root_path 
     end
   end 
@@ -56,4 +58,5 @@ class ItemsController < ApplicationController
     @product = Product.find(params[:id])
   end 
 
+  
 end

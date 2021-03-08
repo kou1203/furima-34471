@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :in_to_index, only: [:index, :create]
   before_action :set_product, only: [:index, :create]
+  before_action :in_to_index, only: [:index, :create]
   def index 
     @purchase_product_history = PurchaseProductHistory.new
   end 
@@ -9,12 +9,7 @@ class OrdersController < ApplicationController
   def create 
     @purchase_product_history = PurchaseProductHistory.new(purchase_product_history_params)
     if @purchase_product_history.valid?
-      Payjp.api_key = "sk_test_52ff3cca1abad08fcfe13474"
-      Payjp::Charge.create(
-        amount: @product.price,
-        card: purchase_product_history_params[:token],
-        currency: 'jpy'
-      )
+      set_payjp
       @purchase_product_history.save 
       return redirect_to root_path 
     else 
@@ -33,9 +28,18 @@ class OrdersController < ApplicationController
   end
 
   def in_to_index
-    if current_user.id == Product.find(params[:item_id]).user_id || Product.find(params[:item_id]).product_history != nil
+    if current_user.id == @product.user_id || @product.product_history != nil
       redirect_to root_path
     end
+  end
+
+  def set_payjp
+    Payjp.api_key = PAYJP_SECRET_KEY
+      Payjp::Charge.create(
+        amount: @product.price,
+        card: purchase_product_history_params[:token],
+        currency: 'jpy'
+      )
   end
 
 end

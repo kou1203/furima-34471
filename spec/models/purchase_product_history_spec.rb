@@ -43,10 +43,30 @@ RSpec.describe PurchaseProductHistory, type: :model do
         @purchase_product_history.valid?
         expect(@purchase_product_history.errors.full_messages).to include("Address can't be blank")
       end 
-      it '電話番号は11桁以内の数値のみでないと保存できない' do 
-        @purchase_product_history.telephone_number ="abc12345678"
-        @purchase_product_history.valid?
+      it '電話番号が12桁以上だと登録できないこと' do 
+        @purchase_product_history.telephone_number= "0901234567890"
+        @purchase_product_history.valid? 
         expect(@purchase_product_history.errors.full_messages).to include("Telephone number is invalid")
+      end 
+      it '電話番号が全角数字だと登録できないこと' do 
+        @purchase_product_history.telephone_number="０９０１２３４５６７８"
+        @purchase_product_history.valid? 
+        expect(@purchase_product_history.errors.full_messages).to include("Telephone number is invalid")
+      end 
+      it '電話番号が半角数字のみでないと登録できないこと' do 
+        @purchase_product_history.telephone_number="0９012３45678"
+        @purchase_product_history.valid? 
+        expect(@purchase_product_history.errors.full_messages).to include("Telephone number is invalid")
+      end 
+      it 'user_idが空では購入できないこと' do 
+        @purchase_product_history.user_id = ""
+        @purchase_product_history.valid? 
+        expect(@purchase_product_history.errors.full_messages).to include("User can't be blank")
+      end 
+      it 'item_idが空では購入できないこと' do 
+        @purchase_product_history.product_id = ""
+        @purchase_product_history.valid? 
+        expect(@purchase_product_history.errors.full_messages).to include("Product can't be blank")
       end 
     end 
   end 

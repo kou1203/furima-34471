@@ -7,10 +7,11 @@ class PurchaseProductHistory
 
   with_options presence: true do 
     validates :postal_code, format: { with: VARID_POSTAL_CODE_REGEX }
-    validates :prefecture_id
+    validates :prefecture_id, numericality: { other_than: 1 }
     validates :municipalities
     validates :address 
     validates :telephone_number, format: { with: VARID_TELEPHONE_NUMBER_REGEX }
+    validates :token
   
   end 
   
